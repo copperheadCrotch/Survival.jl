@@ -41,7 +41,6 @@ To get the Kaplan-Meier estimator from the returned data object,
 To plot the survival data using K-M curves,
 
 `KMplot(kmobject)`
-![K-M curve](https://github.com/conta1992/Survival.jl/blob/master/Example/Figure1.1.png)
-
+<img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figure1.1.png" width="48">
 Specify a color of the curve,
 `KMplot(kmobject, color="red")`
