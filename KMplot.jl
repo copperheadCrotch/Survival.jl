@@ -6,7 +6,7 @@ using DataFrames
 # KMobject
 # Create a survival object
 immutable SurvObject
-   time::Vector{Real}
+   time::Vector{Float64}
    event::Vector{Bool}
 
    # validator
@@ -24,7 +24,7 @@ end # end type
 # KMsurv
 # return object for K-M curve
 type KMsurv
-    t::Vector{Real}
+    t::Vector{Float64}
     n::Vector{Int}
     c::Vector{Int}
     d::Vector{Int}
@@ -65,8 +65,10 @@ function KMest(SurvObject)
     d = [sum(event[findin(time, i)]) for i in t]
     d_n = map(i->1-d[i]/n[i], [i for i = 1:length(n)])
     surv_func = [prod(d_n[1:i]) for i = 1:length(n)]
+
     return KMsurv(t, n, c, d, d_n, surv_func)
 end
+
 
 #=
 K-M curve
@@ -79,7 +81,7 @@ function KMplot(args...; markersize=15, color=[], label=[], ylim=(0, 1.1), xlim=
     num = length(args)
     # step plot
     try
-       isempty(color)? color = collect(take(cycle(["b", "r", "g", "c", "m", "y", "k"]), num)) : color = [color]
+       isempty(color) ? color = collect(take(cycle(["b", "r", "g", "c", "m", "y", "k"]), num)) : color = [color]
        isempty(label) ? label = [1:num] : label
     catch e
        error("Catch an error $e")
