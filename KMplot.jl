@@ -61,7 +61,7 @@ function KMest(SurvObject)
         warn("Add 0 to time points")
     end
     n = [count(i->(i>=j),time) for j in t]
-    c = sort(time[findin(event, 0)])
+    c = sort(unique(time[findin(event, 0)]))
     d = [sum(event[findin(time, i)]) for i in t]
     d_n = map(i->1-d[i]/n[i], [i for i = 1:length(n)])
     surv_func = [prod(d_n[1:i]) for i = 1:length(n)]
@@ -78,8 +78,12 @@ function KMplot(args...; markersize=15, color=[], label=[], ylim=(0, 1.1), xlim=
 
     num = length(args)
     # step plot
-    isempty(color) ? color = collect(take(cycle(["b", "r", "g", "c", "m", "y", "k"]), num)) : color
-    isempty(label) ? label = [1:num] : label
+    try
+       isempty(color)? color = collect(take(cycle(["b", "r", "g", "c", "m", "y", "k"]), num)) : color = [color]
+       isempty(label) ? label = [1:num] : label
+    catch e
+       error("Catch an error $e")
+    end
     for (index, arg) in enumerate(args)
         x = arg.t
         y = arg.surv_func
@@ -105,17 +109,16 @@ end
 surv_obj1 = SurvObject([1, 2, 5, 5, 5, 7, 8, 8, 9, 9],[1, 1, 1, 1, 0, 0, 0, 1, 0, 0])
 # calculate K-M estimators, could be used in K-M plots
 km_object1 = KMest(surv_obj1)
-
-
-
-km_object1
 km_object1.surv_func
 # Example 2
 surv_obj2 = SurvObject([1,12,4,11,16,2,29,21,35,20], [1,0,1,0,1,0,1,1,0,0])
 km_object2 = KMest(surv_obj2)
 
+km_object2.t
+km_object2.surv_func
 # Example 3
-KMplot(km_object1, km_object2, color=[])
-
+KMplot(km_object1)
+KMplot(km_object1, color=["red"], ylim=(0, 1.2))
+KMplot(km_object1, color="red", ylim=(0, 1.2))
 # Example 4
 KMplot(km_object1, km_object2, color=["y", "k"])
