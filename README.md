@@ -1,11 +1,8 @@
 #Julia package for survival analysis (under development)#
-======
 This module aims to provide support for most of up-to-date staistical analytic approach used in survival analysis. It will include functions through baisc layout of data from survival analysis to built-up survival model. The plots require package [PyPlot] pre-installed to Julia. If not installed yet, run `Pkg.add("PyPlot")`. It is developed under Julia 0.4.3.
 ##Update##
-------
 01/27/2016 K-M estimator calculation and K-M curve
 ##Usage##
-------
 ####Create a survival data object for further use####
 Most of the survival data we collected contains the information about time-to-event and indicator whether the patient is censored. To create a survival object for further use, run `SurvObject(time, event)`. Where `time` is a vector of time-to-event data and `event` is a vector of corresponding indicators, 0 as being censored, 1 as having events. This data object is used in further analysis.
 
@@ -43,7 +40,7 @@ To plot the survival data using K-M curves,
 
 `KMplot(kmobject)`
 
-<img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figure1.1.png" width="250">
+<img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figure1.1.png" width="450">
 
 Specify a color of the curve,
 `KMplot(kmobject, color="red")`
