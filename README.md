@@ -43,4 +43,6 @@ To plot the survival data using K-M curves,
 <img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figure1.1.png" width="450">
 
 Specify a color of the curve,
-`KMplot(kmobject, color="red")`
+`KMplot(km_object1, color=["red"], ylim=(0, 1.1))`
+
+<img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figure1.2.png" width="450">
