@@ -1,6 +1,7 @@
 # Survival analysis
 # Julia script for plotting Kaplan-Meier curve
 using PyPlot
+using DataFrames
 
 # KMobject
 # Create a survival object
@@ -51,7 +52,7 @@ survival probability: the survival proabability at time i
 This object could be further used to plot the K-M curve
 =#
 
-function KMEst(SurvObject)
+function KMest(SurvObject)
     time = SurvObject.time
     event = SurvObject.event
     t = sort(unique(time))
@@ -79,7 +80,6 @@ function KMplot(args...; markersize=15, color=[], label=[], ylim=(0, 1.1), xlim=
     # step plot
     isempty(color) ? color = collect(take(cycle(["b", "r", "g", "c", "m", "y", "k"]), num)) : color
     isempty(label) ? label = [1:num] : label
-    # p = PyPlot.figure() # create a figure
     for (index, arg) in enumerate(args)
         x = arg.t
         y = arg.surv_func
@@ -102,13 +102,17 @@ end
 # Example 1
 # test for type SurvObject
 # create a survival object
-surv_obj1 = SurvObject([1,2,3,1,16,2,30,20,30,23], [1,0,1,1,1,1,1,1,0,0])
+surv_obj1 = SurvObject([1, 2, 5, 5, 5, 7, 8, 8, 9, 9],[1, 1, 1, 1, 0, 0, 0, 1, 0, 0])
 # calculate K-M estimators, could be used in K-M plots
-km_object1 = KMEst(surv_obj1)
+km_object1 = KMest(surv_obj1)
 
+
+
+km_object1
+km_object1.surv_func
 # Example 2
 surv_obj2 = SurvObject([1,12,4,11,16,2,29,21,35,20], [1,0,1,0,1,0,1,1,0,0])
-km_object2 = KMEst(surv_obj2)
+km_object2 = KMest(surv_obj2)
 
 # Example 3
 KMplot(km_object1, km_object2, color=[])
