@@ -2,6 +2,7 @@
 ======
 This module aims to provide support for most of up-to-date staistical analytic approach used in survival analysis. It will include functions through baisc layout of data from survival analysis to built-up survival model. The plots require package [PyPlot] pre-installed to Julia. If not installed yet, run `Pkg.add("PyPlot")`. It is developed under Julia 0.4.3.
 ##Update##
+------
 01/27/2016 K-M estimator calculation and K-M curve
 ##Usage##
 ------
@@ -41,6 +42,8 @@ To get the Kaplan-Meier estimator from the returned data object,
 To plot the survival data using K-M curves,
 
 `KMplot(kmobject)`
-<img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figure1.1.png" width="48">
+
+<img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figure1.1.png" width="250">
+
 Specify a color of the curve,
 `KMplot(kmobject, color="red")`
