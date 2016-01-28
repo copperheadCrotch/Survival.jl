@@ -34,6 +34,26 @@ To get the Kaplan-Meier estimator from the returned data object,
  0.45
  0.45
  ```
+To transform the returned object into a `DataFrame` object in Julia,  [DataFrame](https://github.com/JuliaStats/DataFrames.jl) needs to be installed. Using `KMlayout(kmobject)` performs the transformation.
+
+`KMlayout(kmobject)`
+
+```
+11x5 DataFrames.DataFrame
+| Row | Time | Total | Event | Death    | Survival |
+|-----|------|-------|-------|----------|----------|
+| 1   | 0.0  | 10    | 0     | 1.0      | 1.0      |
+| 2   | 1.0  | 10    | 1     | 0.9      | 0.9      |
+| 3   | 2.0  | 9     | 0     | 1.0      | 0.9      |
+| 4   | 4.0  | 8     | 1     | 0.875    | 0.7875   |
+| 5   | 11.0 | 7     | 0     | 1.0      | 0.7875   |
+| 6   | 12.0 | 6     | 0     | 1.0      | 0.7875   |
+| 7   | 16.0 | 5     | 1     | 0.8      | 0.63     |
+| 8   | 20.0 | 4     | 0     | 1.0      | 0.63     |
+| 9   | 21.0 | 3     | 1     | 0.666667 | 0.42     |
+| 10  | 29.0 | 2     | 1     | 0.5      | 0.21     |
+| 11  | 35.0 | 1     | 0     | 1.0      | 0.21     |
+```
 
 ####Kaplan-Meier Curve####
 To plot the survival data using K-M curves, `KMplot(kmobject)`
