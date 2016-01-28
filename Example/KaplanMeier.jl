@@ -1,4 +1,5 @@
 using Survival
+include("../src/KM.jl")
 # test for KMplot.jl
 # Example 1
 # test for type SurvObject
