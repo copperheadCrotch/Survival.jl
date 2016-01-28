@@ -2,8 +2,7 @@
 <body>
 <h4>Julia package for survival analysis (under development)	</h4><br/>
 ---
-The module aims to provide comprehensive functions used in survival analysis. Plot requires [PyPlot](https://github.com/stevengj/PyPlot.jl) package installed to Julia.To install the package `PyPlot`, 
-simply run `Pkg.add("PyPlot")`.
+The module aims to provide comprehensive data analytic approaches used in survival analysis. This includes survival data layout, calculate survival and hazard function, as well as building models. Plot requires [PyPlot](https://github.com/stevengj/PyPlot.jl) package pre-installed to Julia. If the the package `PyPlot` is not installed yet, run `Pkg.add("PyPlot")` to add the package.
 ---
 <h5>Kaplan-Meier Estimator</h5>
 
