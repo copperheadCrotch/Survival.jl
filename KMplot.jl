@@ -119,6 +119,6 @@ km_object2.surv_func
 # Example 3
 KMplot(km_object1)
 KMplot(km_object1, color=["red"], ylim=(0, 1.2))
-KMplot(km_object1, color="red", ylim=(0, 1.2))
+KMplot(km_object1, color="red", xlim=(0, 10))
 # Example 4
 KMplot(km_object1, km_object2, color=["y", "k"])
