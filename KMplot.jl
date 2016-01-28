@@ -5,7 +5,7 @@ using DataFrames
 
 # KMobject
 # Create a survival object
-immutable SurvObject
+type SurvObject
    time::Vector{Float64}
    event::Vector{Bool}
 
@@ -23,7 +23,7 @@ end # end type
 
 # KMsurv
 # return object for K-M curve
-type KMsurv
+immutable KMsurv
     t::Vector{Float64}
     n::Vector{Int}
     c::Vector{Int}
@@ -31,8 +31,6 @@ type KMsurv
     d_n::Vector{Float64}
     surv_func::Vector{Float64}
 end
-
-
 
 #=
 KMobject
@@ -52,11 +50,11 @@ survival probability: the survival proabability at time i
 This object could be further used to plot the K-M curve
 =#
 
-function KMest(SurvObject)
-    time = SurvObject.time
-    event = SurvObject.event
+function KMest(survobj::SurvObject)
+    time = survobj.time
+    event = survobj.event
     t = sort(unique(time))
-    if t[1] != 0.0
+    if t[1] != 0
         unshift!(t, 0)
         warn("Add 0 to time points")
     end
@@ -69,6 +67,15 @@ function KMest(SurvObject)
     return KMsurv(t, n, c, d, d_n, surv_func)
 end
 
+#=
+KMsurv to DataFrame
+Input: KMsurv object
+require DataFrame
+=#
+function KMlayout(kmobj::KMsurv)
+    KMtable = DataFrame(Time=kmobj.t, Total=kmobj.n, Event=kmobj.d, Death=kmobj.d_n, Survival=kmobj.surv_func)
+    return KMtable
+end
 
 #=
 K-M curve
@@ -87,6 +94,9 @@ function KMplot(args...; markersize=15, color=[], label=[], ylim=(0, 1.1), xlim=
        error("Catch an error $e")
     end
     for (index, arg) in enumerate(args)
+        if !isa(arg, KMsurv)
+            error("Input is not a KMsurv object!\n")
+        end
         x = arg.t
         y = arg.surv_func
         # markers
@@ -100,27 +110,3 @@ function KMplot(args...; markersize=15, color=[], label=[], ylim=(0, 1.1), xlim=
     PyPlot.xlim(xlim) # x limit (0 - max time)
     # PyPlot.legend(handles=[plot1]) legend
 end
-
-# test for plot
-# dev test
-# get an composite variable KMsurv
-
-# Example 1
-# test for type SurvObject
-# create a survival object
-surv_obj1 = SurvObject([1, 2, 5, 5, 5, 7, 8, 8, 9, 9],[1, 1, 1, 1, 0, 0, 0, 1, 0, 0])
-# calculate K-M estimators, could be used in K-M plots
-km_object1 = KMest(surv_obj1)
-km_object1.surv_func
-# Example 2
-surv_obj2 = SurvObject([1,12,4,11,16,2,29,21,35,20], [1,0,1,0,1,0,1,1,0,0])
-km_object2 = KMest(surv_obj2)
-
-km_object2.t
-km_object2.surv_func
-# Example 3
-KMplot(km_object1)
-KMplot(km_object1, color=["red"], ylim=(0, 1.2))
-KMplot(km_object1, color="red", xlim=(0, 10))
-# Example 4
-KMplot(km_object1, km_object2, color=["y", "k"])
