@@ -34,9 +34,7 @@ To get the Kaplan-Meier estimator from the returned data object,
  0.45
  0.45
  ```
-To transform the returned object into a `DataFrame` object in Julia,  [DataFrame](https://github.com/JuliaStats/DataFrames.jl) needs to be installed. Using `KMlayout(kmobject)` performs the transformation.
-
-`KMlayout(kmobject)`
+To transform the returned object into a `DataFrame` object in Julia,  [DataFrame](https://github.com/JuliaStats/DataFrames.jl) needs to be installed. Using `KMlayout(kmobject)` performs the transformation, a dataframe for the alternative survival data layout is then returned
 
 ```
 11x5 DataFrames.DataFrame
