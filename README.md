@@ -38,11 +38,11 @@ To get the Kaplan-Meier estimator from the returned data object,
 ####Kaplan-Meier Curve####
 To plot the survival data using K-M curves, `KMplot(kmobject)`
 
-<img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figure1.1.png" width="450">
+<img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figures/Figure1.1.png" width="450">
 
 Specify a color of the curve,
 `KMplot(km_object1, color="red", xlim=(0, 10))`
 
-<img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figure1.2.png" width="450">
+<img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figures/Figure1.2.png" width="450">
 
 To plot multiple curves in a same figure,`KMplot(km_object1, km_object2...)`
