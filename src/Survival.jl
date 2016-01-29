@@ -1,8 +1,23 @@
 # main module
+# Survival analysis
 module Survival
-    using DataFrame
+    using DataFrames
     using PyPlot
+    export
+        # type
+        SurvObject,
 
-    include("KMplot.jl")
+        # function
+        KMest,
+        KMlayout,
+        KMplot,
+        NAest,
+        SurvLayout
+
+
+    include("SurvBase.jl")
+    include("KaplanMeier.jl")
+    include("NelsonAalen.jl")
+    include("SurvLayout.jl")
 
 end

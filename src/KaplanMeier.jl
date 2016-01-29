@@ -1,29 +1,7 @@
-# Survival analysis
 # Julia script for plotting Kaplan-Meier curve
-using PyPlot
-using DataFrames
-
-# KMobject
-# Create a survival object
-type SurvObject
-   time::Vector{Float64}
-   event::Vector{Bool}
-
-   # validator
-   function SurvObject(t, e)
-       if length(t) != length(e)
-           error("Length unmatched: the event vector should have same length as time vector\n")
-       end
-       if any(i->(i<0.0), t)
-           error("Time could not be negative")
-       end
-       new(t, e)
-   end
-end # end type
-
 # KMsurv
 # return object for K-M curve
-immutable KMsurv
+type KMsurv <: NonParasurv
     t::Vector{Float64}
     n::Vector{Int}
     c::Vector{Int}
@@ -59,29 +37,20 @@ function KMest(survobj::SurvObject)
         warn("Add 0 to time points")
     end
     n = [count(i->(i>=j),time) for j in t]
-    c = sort(unique(time[findin(event, 0)]))
+    # c = sort(unique(time[findin(event, 0)]))
+    c = [count(i->(i==0), event[findin(time, j)]) for j in t]
     d = [sum(event[findin(time, i)]) for i in t]
-    d_n = map(i->1-d[i]/n[i], [i for i = 1:length(n)])
+    # d_n = map(i->1-d[i]/n[i], [i for i = 1:length(n)])
+    d_n = [1-d[i]/n[i] for i = 1:length(n)]
     surv_func = [prod(d_n[1:i]) for i = 1:length(n)]
 
     return KMsurv(t, n, c, d, d_n, surv_func)
 end
 
 #=
-KMsurv to DataFrame
-Input: KMsurv object
-require DataFrame
-=#
-function KMlayout(kmobj::KMsurv)
-    KMtable = DataFrame(Time=kmobj.t, Total=kmobj.n, Event=kmobj.d, Death=kmobj.d_n, Survival=kmobj.surv_func)
-    return KMtable
-end
-
-#=
 K-M curve
 Input: KMsurv object
 =#
-
 function KMplot(args...; markersize=15, color=[], label=[], ylim=(0, 1.1), xlim=(xmin=0))
 # calculate the Kaplan-Meier estimators
 
@@ -100,7 +69,7 @@ function KMplot(args...; markersize=15, color=[], label=[], ylim=(0, 1.1), xlim=
         x = arg.t
         y = arg.surv_func
         # markers
-        censor_x = arg.c
+        censor_x = x[find(arg.c)]
         censor_y = y[findin(x, censor_x)]
 
         PyPlot.step(x, y, where="post", color= color[index], label=label[index])  # plot K-M curve
