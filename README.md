@@ -34,23 +34,19 @@ To get the Kaplan-Meier estimator from the returned data object,
  0.45
  0.45
  ```
-To transform the returned object into a `DataFrame` object in Julia,  [DataFrame](https://github.com/JuliaStats/DataFrames.jl) needs to be installed. Using `KMlayout(kmobject)` performs the transformation, a dataframe for the alternative survival data layout is then returned
+To transform the returned object into a `DataFrame` object in Julia,  [DataFrame](https://github.com/JuliaStats/DataFrames.jl) needs to be installed. Using `Survlayout(kmobject)` performs the transformation, a dataframe for the alternative survival data layout is then returned
 
 ```
-11x5 DataFrames.DataFrame
-| Row | Time | Total | Event | Death    | Survival |
-|-----|------|-------|-------|----------|----------|
-| 1   | 0.0  | 10    | 0     | 1.0      | 1.0      |
-| 2   | 1.0  | 10    | 1     | 0.9      | 0.9      |
-| 3   | 2.0  | 9     | 0     | 1.0      | 0.9      |
-| 4   | 4.0  | 8     | 1     | 0.875    | 0.7875   |
-| 5   | 11.0 | 7     | 0     | 1.0      | 0.7875   |
-| 6   | 12.0 | 6     | 0     | 1.0      | 0.7875   |
-| 7   | 16.0 | 5     | 1     | 0.8      | 0.63     |
-| 8   | 20.0 | 4     | 0     | 1.0      | 0.63     |
-| 9   | 21.0 | 3     | 1     | 0.666667 | 0.42     |
-| 10  | 29.0 | 2     | 1     | 0.5      | 0.21     |
-| 11  | 35.0 | 1     | 0     | 1.0      | 0.21     |
+7x6 DataFrames.DataFrame
+| Row | Time | Total | Censored | Event | Death_Prob | Survival |
+|-----|------|-------|----------|-------|------------|----------|
+| 1   | 0.0  | 10    | 0        | 0     | 1.0        | 1.0      |
+| 2   | 1.0  | 10    | 0        | 1     | 0.9        | 0.9      |
+| 3   | 2.0  | 9     | 0        | 1     | 0.888889   | 0.8      |
+| 4   | 5.0  | 8     | 1        | 2     | 0.75       | 0.6      |
+| 5   | 7.0  | 5     | 1        | 0     | 1.0        | 0.6      |
+| 6   | 8.0  | 4     | 1        | 1     | 0.75       | 0.45     |
+| 7   | 9.0  | 2     | 2        | 0     | 1.0        | 0.45     |
 ```
 
 ####Kaplan-Meier Curve####
@@ -64,3 +60,16 @@ Specify a color of the curve,
 <img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figures/Figure1.2.png" width="450">
 
 To plot multiple curves in a same figure,`KMplot(km_object1, km_object2...)`
+
+####Nelson-Aalen Estimator####
+To get the Nelson-Aalen (N-A) estimator, run `naobject = NAest(surv_obj1)`, the returned object could also be transformed into a `DataFrame`, by running `DataFrame(naobject)`.
+
+6x6 DataFrames.DataFrame
+| Row | Time | Total | Censored | Event | Death_Prob | Cumulative_Hazard |
+|-----|------|-------|----------|-------|------------|-------------------|
+| 1   | 1.0  | 10    | 0        | 1     | 0.9        | 0.9               |
+| 2   | 2.0  | 9     | 0        | 1     | 0.888889   | 1.78889           |
+| 3   | 5.0  | 8     | 1        | 2     | 0.75       | 2.53889           |
+| 4   | 7.0  | 5     | 1        | 0     | 1.0        | 3.53889           |
+| 5   | 8.0  | 4     | 1        | 1     | 0.75       | 4.28889           |
+| 6   | 9.0  | 2     | 2        | 0     | 1.0        | 5.28889           |
