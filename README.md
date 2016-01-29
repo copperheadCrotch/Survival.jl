@@ -1,5 +1,5 @@
 #Julia package for survival analysis (under development)#
-This module aims to provide support for most of up-to-date staistical analytic approaches used in survival analysis. It will include functions through basic layout of survival data from survival analysis to complex survival models. The plots require package [PyPlot] pre-installed to Julia, which provides an interface to `Mathplotlib` in Python. If not installed yet, run `Pkg.add("PyPlot")`. This module is developed under Julia 0.4.3.
+This module aims to provide support for most of up-to-date staistical analytic approaches used in survival analysis. It will include functions through basic layout of survival data from survival analysis to complex survival models. The plots require package [PyPlot](https://github.com/stevengj/PyPlot.jl) pre-installed to Julia, which provides an interface to `Mathplotlib` in Python. If not installed yet, run `Pkg.add("PyPlot")`. This module is developed under Julia 0.4.3.
 ##Update##
 01/27/2016 Function for Kaplan-Meier analysis
            Calculate Nelson-Aalen estimator
@@ -15,14 +15,17 @@ In general survival analysis, we should obtain two vectors for this, `time=[1, 2
 
 ####Alternative Data Layout for Kaplan-Meier Curves####
 
-Alternative data layout is required for Kaplan-Meier(K-M) curves, K-M estimator is calculated using the product limit formula. Using the survival data object generated above, we could get a K-M data object for layout and K-M curve through `KMest(survobj)`.
+Alternative data layout is required for Kaplan-Meier(K-M) curves. K-M estimator is calculated from the product limit of survival probabilities. With the data object we instantiated above, a K-M data object for data layout and K-M curve is returned from `kmobject = KMest(survobj)`.
 
-`kmobject = KMest(survobj)` will return you an object used in data layout and K-M plots
+To get the Kaplan-Meier estimator from the returned data object, retrieve the attribute `surv_func` in the K-M object, `kmobject.surv_func`, in the same Example 1.1, the K-M estimators of survival probability at each time points are returned in a vector.
 
+<<<<<<< HEAD
 To get the Kaplan-Meier estimator from the returned data object,
 
 `kmobject.surv_func`
 
+=======
+>>>>>>> origin/master
  ```
  7-element Array{Float64,1}:
  1.0
@@ -33,7 +36,7 @@ To get the Kaplan-Meier estimator from the returned data object,
  0.45
  0.45
  ```
-To transform the returned object into a `DataFrame` object in Julia,  [DataFrame](https://github.com/JuliaStats/DataFrames.jl) needs to be installed. Using `Survlayout(kmobject)` performs the transformation, a dataframe for the alternative survival data layout is then returned
+To transform the returned object into a `DataFrame` object in Julia,  [DataFrame](https://github.com/JuliaStats/DataFrames.jl) needs to be installed. Using `Survlayout(kmobject)` performs the transformation, a dataframe for the alternative survival data layout is then returned.
 
 ```
 7x6 DataFrames.DataFrame
@@ -59,6 +62,8 @@ Specify a color of the curve,
 <img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figures/Figure1.2.png" width="450">
 
 To plot multiple curves in a same figure,`KMplot(km_object1, km_object2...)`
+
+<img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figures/Figure1.3.png" width="450">
 
 ####Nelson-Aalen Estimator####
 To get the Nelson-Aalen (N-A) estimator, run `naobject = NAest(surv_obj1)`, the returned object could also be transformed into a `DataFrame`, by running `SurvLayout(naobject)`.
