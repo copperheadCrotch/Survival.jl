@@ -9,11 +9,11 @@ Most of the survival data we collected contains the information about time-to-ev
 
 #####Example 1.1#####
 
-In a study of remission of poststroke depression in weeks for two groups of stroke patients, with 10 patients in each group. Group 1 was the treatment group with mood treatment and group2 was the control, the study went on for 9 weeks. At the end of study, in group 1, 5 had remissions during the intervention, the rest of patients were censored. The data for group 1 was collected: 1, 2, 5, 5, 5+, 7+, 8+, 8, 9+, 9+, where '+' denotes censoring. 
+In a study of remission of poststroke depression in weeks for two groups of stroke patients, with 10 patients in each group. Group 1 was the treatment group with mood treatment and group2 was the control, the study went on for 9 weeks. At the end of study, 5 patients had remissions in the intervention arm, 5 were censored during the trial. The time-to-remission data for group 1 was also collected: 1, 2, 5, 5, 5+, 7+, 8+, 8, 9+, 9+, where '+' denotes censoring. 
 
-We create two vectors for this, `time=[1, 2, 5, 5, 5, 7, 8, 8, 9, 9]` and `event=[1, 1, 1, 1, 0, 0, 0, 1, 0, 0]`, then we could create a survival data object `survobj`,
+In general survival analysis, we should create two vectors for this, `time=[1, 2, 5, 5, 5, 7, 8, 8, 9, 9]` and `event=[1, 1, 1, 1, 0, 0, 0, 1, 0, 0]`. In Julia, we could create such a data object using `survobj`,
 
-`survobj = SurvObject(time, event)`
+`survobj = SurvObject(time, event)`, where time and event are the two Vectors(1 dimensional Array)
 
 ####Alternative Data Layout for Kaplan-Meier Curves####
 
