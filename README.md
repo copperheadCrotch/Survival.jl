@@ -5,15 +5,13 @@ This module aims to provide support for most of up-to-date staistical analytic a
            Calculate Nelson-Aalen estimator
 ##Usage##
 ####Create a survival data object for further use####
-Most of the survival data we collected contains the information about time-to-event and indicator whether the patient is censored. To create a survival object for further use, run `SurvObject(time, event)`. Where `time` is a vector of time-to-event data and `event` is a vector of corresponding indicators, 0 as being censored, 1 as having events. This data object is used in further analysis.
+To carry out some non-parametric survival analysis, we usually collect data of time-to-event and censoring information. This module allows to create a survival object for further use by running `SurvObject(time, event)`. Where `time` is a vector of time-to-event data and `event` is a vector of corresponding indicators, where 0 denotes being censored, 1 denotes having events. 
 
 #####Example 1.1#####
 
 In a study of remission of poststroke depression in weeks for two groups of stroke patients, with 10 patients in each group. Group 1 was the treatment group with mood treatment and group2 was the control, the study went on for 9 weeks. At the end of study, 5 patients had remissions in the intervention arm, 5 were censored during the trial. The time-to-remission data for group 1 was also collected: 1, 2, 5, 5, 5+, 7+, 8+, 8, 9+, 9+, where '+' denotes censoring. 
 
-In general survival analysis, we should create two vectors for this, `time=[1, 2, 5, 5, 5, 7, 8, 8, 9, 9]` and `event=[1, 1, 1, 1, 0, 0, 0, 1, 0, 0]`. In Julia, we could create such a data object using `survobj`,
-
-`survobj = SurvObject(time, event)`, where time and event are the two Vectors(1 dimensional Array)
+In general survival analysis, we should obtain two vectors for this, `time=[1, 2, 5, 5, 5, 7, 8, 8, 9, 9]` and `event=[1, 1, 1, 1, 0, 0, 0, 1, 0, 0]`. Therefore we could create the object first, `survobj = SurvObject(time, event)`,
 
 ####Alternative Data Layout for Kaplan-Meier Curves####
 
