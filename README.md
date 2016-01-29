@@ -63,7 +63,7 @@ To plot multiple curves in a same figure,`KMplot(km_object1, km_object2...)`
 
 ####Nelson-Aalen Estimator####
 To get the Nelson-Aalen (N-A) estimator, run `naobject = NAest(surv_obj1)`, the returned object could also be transformed into a `DataFrame`, by running `DataFrame(naobject)`.
-
+```
 6x6 DataFrames.DataFrame
 | Row | Time | Total | Censored | Event | Death_Prob | Cumulative_Hazard |
 |-----|------|-------|----------|-------|------------|-------------------|
@@ -73,3 +73,4 @@ To get the Nelson-Aalen (N-A) estimator, run `naobject = NAest(surv_obj1)`, the 
 | 4   | 7.0  | 5     | 1        | 0     | 1.0        | 3.53889           |
 | 5   | 8.0  | 4     | 1        | 1     | 0.75       | 4.28889           |
 | 6   | 9.0  | 2     | 2        | 0     | 1.0        | 5.28889           |
+```
