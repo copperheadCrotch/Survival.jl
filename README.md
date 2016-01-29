@@ -1,7 +1,8 @@
 #Julia package for survival analysis (under development)#
-This module aims to provide support for most of up-to-date staistical analytic approach used in survival analysis. It will include functions through baisc layout of data from survival analysis to built-up survival model. The plots require package [PyPlot] pre-installed to Julia. If not installed yet, run `Pkg.add("PyPlot")`. It is developed under Julia 0.4.3.
+This module aims to provide support for most of up-to-date staistical analytic approaches used in survival analysis. It will include functions through basic layout of survival data from survival analysis to complex survival models. The plots require package [PyPlot] pre-installed to Julia, which provides an interface to `Mathplotlib` in Python. If not installed yet, run `Pkg.add("PyPlot")`. This module is developed under Julia 0.4.3.
 ##Update##
 01/27/2016 Function for Kaplan-Meier analysis
+           Calculate Nelson-Aalen estimator
 ##Usage##
 ####Create a survival data object for further use####
 Most of the survival data we collected contains the information about time-to-event and indicator whether the patient is censored. To create a survival object for further use, run `SurvObject(time, event)`. Where `time` is a vector of time-to-event data and `event` is a vector of corresponding indicators, 0 as being censored, 1 as having events. This data object is used in further analysis.
