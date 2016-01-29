@@ -1,8 +1,11 @@
 # main module
 # Survival analysis
 module Survival
-    using DataFrames
-    using PyPlot
+    using Reexport
+    using Compat
+    @reexport using DataFrames
+    @reexport using PyPlot
+    
     export
         # type
         SurvObject,

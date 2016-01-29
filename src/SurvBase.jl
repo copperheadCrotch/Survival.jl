@@ -17,16 +17,3 @@ end # end type
 
 # non-parametric type
 abstract NonParasurv
-
-
-#=Calculate basic survival statistics
-immutable SurvBasic
-
-end
-
-
-
-function SurvFunc(λ, t; family="exp")
-    return exp(-λ*t)
-end
-=#

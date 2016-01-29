@@ -15,7 +15,7 @@ km_object1.surv_func
 surv_obj2 = SurvObject([1,12,4,11,16,2,29,21,35,20], [1,0,1,0,1,0,1,1,0,0])
 km_object2 = KMest(surv_obj2)
 # get a DataFrame object
-SurvLayout(km_object2)
+SurvLayout(km_object1)
 
 
 
