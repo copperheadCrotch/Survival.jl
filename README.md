@@ -15,14 +15,10 @@ In general survival analysis, we should obtain two vectors for this, `time=[1, 2
 
 ####Alternative Data Layout for Kaplan-Meier Curves####
 
-Alternative data layout is required for Kaplan-Meier(K-M) curves, K-M estimator is calculated using the product limit formula. Using the survival data object generated above, we could get a K-M data object for layout and K-M curve through `KMest(survobj)`.
+Alternative data layout is required for Kaplan-Meier(K-M) curves. K-M estimator is calculated from the product limit of survival probabilities. With the data object we instantiated above, a K-M data object for data layout and K-M curve is returned from `kmobject = KMest(survobj)`.
 
-`kmobject = KMest(survobj)` will return you an object used in data layout and K-M plots
+To get the Kaplan-Meier estimator from the returned data object, retrieve the attribute `surv_func` in the K-M object, `kmobject.surv_func`, in the same Example 1.1, the K-M estimators of survival probability at each time points are returned in a vector.
 
-To get the Kaplan-Meier estimator from the returned data object,
-
-`kmobject.surv_func`
- 
  ```
  7-element Array{Float64,1}:
  1.0 
@@ -33,7 +29,7 @@ To get the Kaplan-Meier estimator from the returned data object,
  0.45
  0.45
  ```
-To transform the returned object into a `DataFrame` object in Julia,  [DataFrame](https://github.com/JuliaStats/DataFrames.jl) needs to be installed. Using `Survlayout(kmobject)` performs the transformation, a dataframe for the alternative survival data layout is then returned
+To transform the returned object into a `DataFrame` object in Julia,  [DataFrame](https://github.com/JuliaStats/DataFrames.jl) needs to be installed. Using `Survlayout(kmobject)` performs the transformation, a dataframe for the alternative survival data layout is then returned.
 
 ```
 7x6 DataFrames.DataFrame
