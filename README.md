@@ -60,6 +60,8 @@ Specify a color of the curve,
 
 To plot multiple curves in a same figure,`KMplot(km_object1, km_object2...)`
 
+<img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figures/Figure1.3.png" width="450">
+
 ####Nelson-Aalen Estimator####
 To get the Nelson-Aalen (N-A) estimator, run `naobject = NAest(surv_obj1)`, the returned object could also be transformed into a `DataFrame`, by running `DataFrame(naobject)`.
 ```
