@@ -24,8 +24,6 @@ To get the Kaplan-Meier estimator from the returned data object,
 
 `kmobject.surv_func`
 
-=======
->>>>>>> origin/master
  ```
  7-element Array{Float64,1}:
  1.0
