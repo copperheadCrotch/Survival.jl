@@ -19,7 +19,6 @@ Alternative data layout is required for Kaplan-Meier(K-M) curves. K-M estimator 
 
 To get the Kaplan-Meier estimator from the returned data object, retrieve the attribute `surv_func` in the K-M object, `kmobject.surv_func`, in the same Example 1.1, the K-M estimators of survival probability at each time points are returned in a vector.
 
-<<<<<<< HEAD
 To get the Kaplan-Meier estimator from the returned data object,
 
 `kmobject.surv_func`
