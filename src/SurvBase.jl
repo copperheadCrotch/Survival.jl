@@ -1,5 +1,5 @@
 # Create a survival object
-type SurvObject
+immutable SurvObject
    time::Vector{Float64}
    event::Vector{Bool}
 
@@ -16,4 +16,21 @@ type SurvObject
 end # end type
 
 # non-parametric type
-abstract NonParasurv
+abstract NonParaSurv
+
+#=
+function SurvBasic(::Exponential)
+
+    surv_func = exp(-λ)
+    hazard = λ
+    println("survival function: $surv_func")
+    println("hazard function: $hazard")
+    println("cumulative hazard: $cum_hazard")
+    println("mean residual life: $mean_res_life")
+end
+
+
+function SurvBasic(::Weibull)
+
+end
+=#
