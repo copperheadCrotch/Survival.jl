@@ -1,6 +1,6 @@
 # MRLSurv type
 immutable MRLSurv <: NonParaSurv
-    time::Vector{Float64}
+    t::Vector{Float64}
     mean_resid_life::Vector{Float64}
 end
 
@@ -16,10 +16,9 @@ function MeanResidLife(survobj::KMSurv)
     end
 
     time_interval = diff(survobj.t)
-    pop!(surv_func)
+    unshift!(time_interval, 0)
     area = time_interval .* surv_func # calculate area under the curve
     area_under_curve = reverse(cumsum(reverse(area)))
-    push!(area_under_curve, 0)
 
     censor_time = time[censor]
     mean_resid_life = area_under_curve[censor]

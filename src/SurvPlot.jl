@@ -3,7 +3,7 @@ function SurvPlot(args::KMSurv...; color=[], label=[], markercolor="black", mark
                 ylim=(0, 1.1), xlim=(xmin=0), title="", xlabel="time",
                 ylabel="Kaplan-Meier Estimator")
 # calculate the Kaplan-Meier estimators
-
+    PyPlot.close()
     # PyPlot.figure()
     num = length(args)
     # step plot
@@ -39,7 +39,7 @@ end
 function SurvPlot(args::NASurv...; color=[], label=[],
                 ylim=(ymin=0), xlim=(xmin=0), title="",
                 xlabel="time", ylabel="Nelson-Aalen Estimator")
-
+    PyPlot.close()
     # PyPlot.figure()
     # calculate the Nelson-Aalen estimators
     num = length(args)

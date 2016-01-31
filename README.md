@@ -15,7 +15,7 @@ In general survival analysis, we should obtain two vectors for this, `time=[1, 2
 
 ####Alternative Data Layout for Kaplan-Meier Curves####
 
-Alternative data layout is required for Kaplan-Meier(K-M) curves. K-M estimator is calculated from the product limit of survival probabilities. With the data object we instantiated above, a K-M data object for data layout and K-M curve is returned from `kmobject = KMest(survobj)`.
+Alternative data layout is required for Kaplan-Meier(K-M) curves. K-M estimator is calculated from the product limit of survival probabilities. With the data object we instantiated above, a K-M data object for data layout and K-M curve is returned from `kmobject = KMEst(survobj)`.
 
 To get the Kaplan-Meier estimator from the returned data object, retrieve the attribute `surv_func` in the K-M object, `kmobject.surv_func`, in the same Example 1.1, the K-M estimators of survival probability at each time points are returned in a vector.
 
@@ -33,7 +33,7 @@ To get the Kaplan-Meier estimator from the returned data object,
  0.45
  0.45
  ```
-To transform the returned object into a `DataFrame` object in Julia,  [DataFrame](https://github.com/JuliaStats/DataFrames.jl) needs to be installed. Using `Survlayout(kmobject)` performs the transformation, a dataframe for the alternative survival data layout is then returned.
+To transform the returned object into a `DataFrame` object in Julia,  [DataFrame](https://github.com/JuliaStats/DataFrames.jl) needs to be installed. Using `SurvLayout(kmobject)` performs the transformation, a dataframe for the alternative survival data layout is then returned.
 
 ```
 7x6 DataFrames.DataFrame
@@ -49,21 +49,21 @@ To transform the returned object into a `DataFrame` object in Julia,  [DataFrame
 ```
 
 ####Kaplan-Meier Curve####
-To plot the survival data using K-M curves, `KMplot(kmobject)`
+To plot the survival data using K-M curves, `SurvPlot(kmobject)`
 
 <img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figures/Figure1.1.png" width="450">
 
 Specify a color of the curve,
-`KMplot(km_object1, color="red", xlim=(0, 10))`
+`SurvPlot(km_object1, color="red", xlim=(0, 10))`
 
 <img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figures/Figure1.2.png" width="450">
 
-To plot multiple curves in a same figure,`KMplot(km_object1, km_object2...)`
+To plot multiple curves in a same figure,`SurvPlot(km_object1, km_object2...)`
 
 <img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figures/Figure1.3.png" width="450">
 
 ####Nelson-Aalen Estimator####
-To get the Nelson-Aalen (N-A) estimator, run `naobject = NAest(surv_obj1)`, the returned object could also be transformed into a `DataFrame`, by running `SurvLayout(naobject)`.
+To get the Nelson-Aalen (N-A) estimator, run `naobject = NAEst(surv_obj1)`, the returned object could also be transformed into a `DataFrame`, by running `SurvLayout(naobject)`.
 ```
 6x6 DataFrames.DataFrame
 | Row | Time | Total | Censored | Event | Death_Prob | Cumulative_Hazard |
@@ -74,4 +74,16 @@ To get the Nelson-Aalen (N-A) estimator, run `naobject = NAest(surv_obj1)`, the 
 | 4   | 7.0  | 5     | 1        | 0     | 1.0        | 3.53889           |
 | 5   | 8.0  | 4     | 1        | 1     | 0.75       | 4.28889           |
 | 6   | 9.0  | 2     | 2        | 0     | 1.0        | 5.28889           |
+```
+####Mean Residual Life for Censored Data####
+Based on the Kaplan-Meier estimates, mean residual life could be calculated for censored data. Run `meanresidobject(kmobject)` to get a mean residual life estimates for all the censored data in the input survival data. Similarly, `SurvLayout(meanresidobject)` could transform the returned data into a dataframe.
+
+```
+4x2 DataFrames.DataFrame
+| Row | Time | Mean_Residual_Life |
+|-----|------|--------------------|
+| 1   | 5.0  | 2.25               |
+| 2   | 7.0  | 1.05               |
+| 3   | 8.0  | 0.45               |
+| 4   | 9.0  | 0.0                |
 ```
