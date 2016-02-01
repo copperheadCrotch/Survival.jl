@@ -8,6 +8,7 @@ immutable KMSurv <: NonParaSurv
     d::Vector{Int}
     d_n::Vector{Float64}
     surv_func::Vector{Float64}
+    std::Vector{Float64}
 end
 
 #=
@@ -28,7 +29,7 @@ survival probability: the survival proabability at time i
 This object could be further used to plot the K-M curve
 =#
 
-function KMEst(survobj::SurvObject)
+function KMEst(survobj::SurvObject; stdtype="Greenwood")
     time = survobj.time
     event = survobj.event
     t = sort(unique(time))
@@ -43,6 +44,10 @@ function KMEst(survobj::SurvObject)
     # d_n = map(i->1-d[i]/n[i], [i for i = 1:length(n)])
     d_n = [1-d[i]/n[i] for i = 1:length(n)]
     surv_func = [prod(d_n[1:i]) for i = 1:length(n)]
-
-    return KMSurv(t, n, c, d, d_n, surv_func)
+    if stdtype == "Greenwood"
+        std_prod = cumsum([d[i]/(n[i]*(n[i]-d[i])) for i = 1:length(n)])
+        var = (surv_func.^2).*std_prod
+        std = sqrt(float64(var))
+    end
+    return KMSurv(t, n, c, d, d_n, surv_func, std)
 end

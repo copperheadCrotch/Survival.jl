@@ -1,7 +1,7 @@
 # transform to Dataframe
 function SurvLayout(survobj::KMSurv)
     Survtable = DataFrame(Time=survobj.t, Total=survobj.n, Censored=survobj.c,
-                          Event=survobj.d, Survival_Prob=survobj.d_n, Survival=survobj.surv_func)
+                          Event=survobj.d, Survival_Prob=survobj.d_n, Survival=survobj.surv_func, Std_Error=survobj.std)
     return Survtable
 end
 
