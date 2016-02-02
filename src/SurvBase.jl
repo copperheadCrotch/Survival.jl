@@ -17,6 +17,12 @@ end # end type
 
 # non-parametric type
 abstract NonParaSurv
+global Z = Normal(0, 1)
+
+immutable SurvConfidenceInterval
+    upper::Vector{Float64}
+    lower::Vector{Float64}
+end
 
 #=
 function SurvBasic(::Exponential)
