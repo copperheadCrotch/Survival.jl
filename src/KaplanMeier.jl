@@ -30,7 +30,7 @@ survival probability: the survival proabability at time i
 This object could be further used to plot the K-M curve
 =#
 
-function KMEst(survobj::SurvObject; stdtype="Greenwood", confidence=nothing, args...)
+function KMEst(survobj::SurvObject; stdtype="Greenwood", confidence=nothing, confidencetype="linear", args...)
     #=
     if !isempty(args)
         # keyargs_dict = [key=>value for (key, value) in args]
@@ -64,11 +64,13 @@ function KMEst(survobj::SurvObject; stdtype="Greenwood", confidence=nothing, arg
     #if haskey(keyargs_dict, :confidence)
     if confidence != nothing
         critical = quantile(Z, confidence/2+0.5)
-        conf_upper = surv_func + critical*std > 1 ? 1:surv_func + critical*std
-        conf_lower = surv_func - critical*std < 0 ? 0:surv_func - critical*std
+        conf_upper = surv_func+critical*std
+        conf_lower = surv_func-critical*std
+        # check boundary
+        conf_upper[map(i->(i>1), conf_upper)]=1
+        conf_lower[map(i->(i<0), conf_lower)]=0
         return KMSurv(t, n, c, d, d_n, surv_func, std, SurvConfidenceInterval(conf_upper, conf_lower))
     else
         return KMSurv(t, n, c, d, d_n, surv_func, std, Nullable())
     end
 end
-
