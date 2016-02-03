@@ -8,7 +8,7 @@ function SurvPlot(args::KMSurv...; color=[], label=[], markercolor="black", mark
     num = length(args)
     # step plot
     try
-       isempty(color) ? color = collect(take(cycle(["b", "r", "g", "c", "m", "y", "k"]), num)) : color = [color]
+       isempty(color) ? color = collect(take(cycle(Surv_Color), num)) : color = [color]
        isempty(label) ? label = [1:num] : label
     catch e
        error("Catch an error $e")
@@ -23,8 +23,12 @@ function SurvPlot(args::KMSurv...; color=[], label=[], markercolor="black", mark
         # censor_y = y[findin(x, censor_x)]
         censor_y = y[censor]
 
-        PyPlot.step(x, y, where="post", color= color[index], label=label[index])  # plot K-M curve
+        PyPlot.step(x, y, where="post", color=color[index], label=label[index])  # plot K-M curve
         PyPlot.plot(censor_x, censor_y, linestyle="None", marker="+", markersize=markersize, color=markercolor)
+        if !isnull(arg.conf_interval)
+            conf_interval = get(arg.conf_interval)
+            PyPlot.fill_between(x, conf_interval.lower, conf_interval.upper, step="post", color=color[index], alpha=0.25)
+        end
     end
     PyPlot.ylim(ylim) # y limit (0 - 1)
     PyPlot.xlim(xlim) # x limit (0 - max time)
@@ -39,7 +43,7 @@ end
 function SurvPlot(args::NASurv...; color=[], label=[],
                 ylim=(ymin=0), xlim=(xmin=0), title="",
                 xlabel="time", ylabel="Nelson-Aalen Estimator")
-    PyPlot.close()
+
     # PyPlot.figure()
     # calculate the Nelson-Aalen estimators
     num = length(args)
