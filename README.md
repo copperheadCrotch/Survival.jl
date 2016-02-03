@@ -1,5 +1,5 @@
 #Julia package for survival analysis (under development)#
-This module aims to provide support for most of up-to-date staistical analytic approaches used in survival analysis. It will include functions through basic layout of survival data from survival analysis to complex survival models. The plots require package [PyPlot](https://github.com/stevengj/PyPlot.jl) pre-installed to Julia, which provides an interface to `Mathplotlib` in Python. If not installed yet, run `Pkg.add("PyPlot")`. This module is developed under Julia 0.4.3.
+This module aims to provide support for most of up-to-date staistical analytic approaches used in survival analysis. It will include functions through basic layout of survival data from survival analysis to complex survival models. The plots require package [PyPlot ](https://github.com/stevengj/PyPlot.jl) pre-installed to Julia, which provides an interface to `Mathplotlib` in Python. To plot the confidence interval, Mathplotlib 1.5.1 needs to be installed. If not installed yet, run `Pkg.add("PyPlot")`. This module is developed under Julia 0.4.3.
 ##Update##
 01/27/2016 Function for Kaplan-Meier analysis
            Calculate Nelson-Aalen estimator
