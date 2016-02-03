@@ -3,6 +3,9 @@ This module aims to provide support for most of up-to-date staistical analytic a
 ##Update##
 01/27/2016 Function for Kaplan-Meier analysis
            Calculate Nelson-Aalen estimator
+01/30 Plot for Nelson-Aalen estimator
+02/02 Greenwood formula for variance of survival probability
+      Confidence interval calcuation & plot for Kaplan-Meier Curve
 ##Usage##
 ####Create a survival data object for further use####
 To carry out some non-parametric survival analysis, we usually collect data of time-to-event and censoring information. This module allows to create a survival object for further use by running `SurvObject(time, event)`. Where `time` is a vector of time-to-event data and `event` is a vector of corresponding indicators, where 0 denotes being censored, 1 denotes having events.
