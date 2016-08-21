@@ -3,7 +3,9 @@ This module aims to provide support for most of up-to-date staistical analytic a
 ##Update##
 01/27/2016 Function for Kaplan-Meier analysis
            Calculate Nelson-Aalen estimator
+           
 01/30 Plot for Nelson-Aalen estimator
+
 02/02 Greenwood formula for variance of survival probability
       Confidence interval calcuation & plot for Kaplan-Meier Curve
 ##Usage##
