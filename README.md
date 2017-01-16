@@ -12,6 +12,7 @@ This module aims to provide support for most of up-to-date staistical analytic a
 ##To do
 
 Update plot function for K-M
+
 Modify the code
 ##Usage##
 ####Create a survival data object for further use####
