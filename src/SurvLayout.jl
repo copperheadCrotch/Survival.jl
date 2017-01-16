@@ -22,3 +22,4 @@ function SurvLayout(survobj::MRLSurv)
     Survtable = DataFrame(Time=survobj.t, Mean_Residual_Life=survobj.mean_resid_life)
     return Survtable
 end
+

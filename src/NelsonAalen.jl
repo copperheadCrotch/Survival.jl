@@ -25,3 +25,4 @@ function NAEst(survobj::SurvObject)
     cum_hazard = cumsum(d_n)
     return NASurv(t, n, c, d, d_n, cum_hazard)
 end
+
