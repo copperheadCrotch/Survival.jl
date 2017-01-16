@@ -1,18 +1,23 @@
 # main module
 # Survival analysis
 module Survival
-    using Reexport
-    using Compat
-    @reexport using DataFrames
-    @reexport using Distributions
-    @reexport using PyPlot
+
+    using PyPlot
+    using Distributions
+    using DocStringExtensions
+
+    # non-parametric type
+    abstract NonParamSurvival
+    abstract ParamSurvival
+
+    const global NORMAL = Normal(0, 1)
+    const global PLOT_COLOR = ["#EE1616","#0000FF","#FF007F","#3399FF","#99FF33","00FFFF","9999FF","#009900","#FFFF00","#FF00FF","#CC6600"]
 
     export
         # type
         SurvObject,
-
         # function
-        KMEst,
+        KaplanMeierEst,
         NAEst,
         MeanResidLife,
         SurvPlot,

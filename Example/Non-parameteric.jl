@@ -9,15 +9,16 @@ surv_obj1 = SurvObject([1,2,5,5,5,7,8,8,9,9],[1,1,1,1,0,0,0,1,0,0])
 # calculate K-M estimators, could be used in K-M plots
 km_object1 = KMEst(surv_obj1)
 km_object1.surv_func
-
+# check confidence interval
+km_object1.conf_interval
 # Example 2
 # create another K-M object
 surv_obj2 = SurvObject([1,12,4,11,16,2,29,21,35,20], [1,0,1,0,1,0,1,1,0,0])
 km_object2 = KMEst(surv_obj2)
 # get a DataFrame object
 SurvLayout(km_object1)
+SurvLayout(km_object2)
 
-km_object1
 
 
 # Example 3
@@ -27,7 +28,7 @@ SurvPlot(km_object1, color=["red"], ylim=(0, 1.2))
 
 # Example 4
 # plot two curves
-SurvPlot(km_object1, km_object2, color=["y", "b"])
+SurvPlot(km_object1, km_object2, xlim=(0, 40))
 
 
 # Example 5

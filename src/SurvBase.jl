@@ -1,36 +1,59 @@
-# Create a survival object
+"""
+$(TYPEDEF)
+
+Create a survival object for analysis.
+
+Constructors
+------------
+* `SurvObject(time::Vector{Real}, event::Vector{Bool})`
+
+Arguments
+---------
+* `time`: The survival time for the patient
+
+* `event`: The indicator for censoring. If event = 1, the patient is censored.
+
+Fields
+------
+$(FIELDS)
+"""
 immutable SurvObject
-   time::Vector{Float64}
+
+   time::Vector{Real}
    event::Vector{Bool}
 
    # validator
-   function SurvObject(t, e)
-       if length(t) != length(e)
-           error("Length unmatched: the event vector should have same length as time vector\n")
+   function SurvObject(time, event)
+
+       if length(time) != length(event)
+           error("Time and event should have the same length\n")
        end
-       if any(i->(i<0.0), t)
-           error("Time could not be negative")
+       if any(i -> (i < 0.0), time)
+           error("Time should always be non-negative!")
        end
-       new(t, e)
+       new(time, event)
+
    end
+
 end # end type
 
-# non-parametric type
-abstract NonParaSurv
 
-#=
-function SurvBasic(::Exponential)
-
-    surv_func = exp(-λ)
-    hazard = λ
-    println("survival function: $surv_func")
-    println("hazard function: $hazard")
-    println("cumulative hazard: $cum_hazard")
-    println("mean residual life: $mean_res_life")
-end
-
-
-function SurvBasic(::Weibull)
-
-end
-=#
+# immutable SurvConfidenceInterval
+#     upper::Vector{Float64}
+#     lower::Vector{Float64}
+# end
+#
+# function SurvBasic(::Exponential)
+#
+#     surv_func = exp(-λ)
+#     hazard = λ
+#     println("survival function: $surv_func")
+#     println("hazard function: $hazard")
+#     println("cumulative hazard: $cum_hazard")
+#     println("mean residual life: $mean_res_life")
+# end
+#
+#
+# function SurvBasic(::Weibull)
+#
+# end
