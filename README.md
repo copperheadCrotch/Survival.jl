@@ -12,7 +12,7 @@ This module aims to provide support for most of up-to-date staistical analytic a
 ##To do
 
 Update plot function for K-M
-
+Modify the code
 ##Usage##
 ####Create a survival data object for further use####
 To carry out some non-parametric survival analysis, we usually collect data of time-to-event and censoring information. This module allows to create a survival object for further use by running `SurvObject(time, event)`. Where `time` is a vector of time-to-event data and `event` is a vector of corresponding indicators, where 0 denotes being censored, 1 denotes having events.
