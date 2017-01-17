@@ -11,18 +11,22 @@ module Survival
     abstract NonParamSurvival
     abstract ParamSurvival
 
-    const global NORMAL = Normal(0, 1)
-    const global PLOT_COLOR = ["#EE1616","#0000FF","#FF007F","#3399FF","#99FF33","00FFFF","9999FF","#009900","#FFFF00","#FF00FF","#CC6600"]
-
+    # type
     export
-        # type
+        Surv,
+
+    # function
+    export
         SurvObject,
-        # function
         KaplanMeierEst,
         NAEst,
         MeanResidLife,
         SurvPlot,
         SurvLayout
+
+
+    const global ZDIST = Normal(0, 1)
+    const global PLOT_COLOR = ["#EE1616","#0000FF","#FF007F","#3399FF","#99FF33","00FFFF","9999FF","#009900","#FFFF00","#FF00FF","#CC6600"]
 
 
     include("SurvBase.jl")
