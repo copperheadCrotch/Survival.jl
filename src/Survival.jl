@@ -3,6 +3,7 @@
 module Survival
 
     using PyPlot
+    using Gadfly
     using Distributions
     using DocStringExtensions
 

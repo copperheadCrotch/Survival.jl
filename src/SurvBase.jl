@@ -5,13 +5,15 @@ Create a survival object for analysis.
 
 Constructors
 ------------
-* `SurvObject(time::Vector{Real}, event::Vector{Bool})`
+* `SurvObject(time::Vector{Real}, event::Vector{Bool}, group::Int)`
 
 Arguments
 ---------
-* `time`: The survival time for the patient
+* `time`: A vector of survival time for patients.
 
-* `event`: The indicator for censoring. If event = 1, the patient is censored.
+* `event`: A vector of censorship indicators. If event = 1, the patient is censored.
+
+* `group`: Optional, applied when there are several groups.
 
 Fields
 ------
@@ -21,9 +23,9 @@ immutable SurvObject
 
    time::Vector{Real}
    event::Vector{Bool}
-
+   group::Vector{Int64}
    # validator
-   function SurvObject(time, event)
+   function SurvObject(time, event, group = )
 
        if length(time) != length(event)
            error("Time and event should have the same length\n")
@@ -31,7 +33,7 @@ immutable SurvObject
        if any(i -> (i < 0.0), time)
            error("Time should always be non-negative!")
        end
-       new(time, event)
+       new(time, event, group)
 
    end
 
