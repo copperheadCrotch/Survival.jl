@@ -18,11 +18,12 @@ $(FIELDS)
 """
 immutable Surv
 
-   time::Vector{Real}
-   event::Vector{Bool}
+   surv_val::DataFrame
    # validator
-   function Surv(time, event)
+   function Surv(surv_val)
 
+       time = surv_val[:, 1]
+       event = surv_val[:, 2]
        if length(time) != length(event)
            error("Time and event should have the same length\n")
        end
@@ -39,7 +40,7 @@ end # end type
 """
 $(SIGNATURES)
 
-Create a survival data object for survival analysis for normal data layout.
+Create a survival data object for survival analysis for general data layout.
 
 Arguments
 ---------
@@ -54,7 +55,7 @@ $(FIELDS)
 """
 function SurvObject(time::Vector{Real}, event::Vector{Bool})
 
-    Surv(time, event)
+    Surv(DataFrame(time = time, event = event))
 
 end
 
@@ -80,6 +81,6 @@ $(FIELDS)
 function SurvObject(time_start::Vector{Real}, time_end::Vector{Real}, event::Vector{Bool})
 
     time = time_end - time_start
-    Surv(time, event)
+    Surv(DataFrame(time = time, event = event))
 
 end
