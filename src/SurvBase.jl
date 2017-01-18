@@ -3,7 +3,7 @@ $(TYPEDEF)
 
 Constructors
 ------------
-* `Surv(time::Vector{Real}, event::Vector{Bool})`
+* `Surv(time::Vector, event::Vector{Bool})`
 
 Arguments
 ---------
@@ -18,12 +18,11 @@ $(FIELDS)
 """
 immutable Surv
 
-   surv_val::DataFrame
+   time::Vector
+   event::Vector{Bool}
    # validator
-   function Surv(surv_val)
+   function Surv(time, event)
 
-       time = surv_val[:, 1]
-       event = surv_val[:, 2]
        if length(time) != length(event)
            error("Time and event should have the same length\n")
        end
@@ -49,13 +48,11 @@ Arguments
 * `event` -- A vector of censorship indicators. If event = 1, the patient has the event, if event = 0 and time < final time, the patient is
 censored.
 
-Fields
-------
-$(FIELDS)
 """
-function SurvObject(time::Vector{Real}, event::Vector{Bool})
+function SurvObject(time::Vector, event::Vector{Bool})
 
-    Surv(DataFrame(time = time, event = event))
+    surv_obj = Surv(time, event)
+    return surv_obj
 
 end
 
@@ -74,13 +71,11 @@ Arguments
 * `event` -- A vector of censorship indicators. If event = 1, the patient has the event, if event = 0 and time < final time, the patient is
 censored.
 
-Fields
-------
-$(FIELDS)
 """
-function SurvObject(time_start::Vector{Real}, time_end::Vector{Real}, event::Vector{Bool})
+function SurvObject(time_start::Vector, time_end::Vector, event::Vector{Bool})
 
     time = time_end - time_start
-    Surv(DataFrame(time = time, event = event))
+    surv_obj = Surv(time, event)
+    return surv_obj
 
 end

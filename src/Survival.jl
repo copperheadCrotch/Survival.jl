@@ -13,7 +13,7 @@ module Survival
 
     # type alias
     typealias Vector{T} Array{T,1}
-    
+
     # type
     export
         Surv
