@@ -1,19 +1,19 @@
-#Julia package for survival analysis (under development)#
+# Julia package for survival analysis (under development) #
 This module aims to provide support for most of up-to-date staistical analytic approaches used in survival analysis. It will include functions through basic layout of survival data from survival analysis to complex survival models. 
-##Update##
+## Update ##
 01/27/2016 Function for Kaplan-Meier analysis
            Calculate Nelson-Aalen estimator
-##Usage##
-####Create a survival data object for further use####
+## Usage ##
+#### Create a survival data object for further use ####
 To carry out some non-parametric survival analysis, we usually collect data of time-to-event and censoring information. This module allows to create a survival object for further use by running `SurvObject(time, event)`. Where `time` is a vector of time-to-event data and `event` is a vector of corresponding indicators, where 0 denotes being censored, 1 denotes having events.
 
-#####Example 1.1#####
+##### Example 1.1 #####
 
 In a study of remission of poststroke depression in weeks for two groups of stroke patients, with 10 patients in each group. Group 1 was the treatment group with mood treatment and group2 was the control, the study went on for 9 weeks. At the end of study, 5 patients had remissions in the intervention arm, 5 were censored during the trial. The time-to-remission data for group 1 was also collected: 1, 2, 5, 5, 5+, 7+, 8+, 8, 9+, 9+, where '+' denotes censoring.
 
 In general survival analysis, we should obtain two vectors for this, `time=[1, 2, 5, 5, 5, 7, 8, 8, 9, 9]` and `event=[1, 1, 1, 1, 0, 0, 0, 1, 0, 0]`. Therefore we could create the object first, `survobj = SurvObject(time, event)`,
 
-####Alternative Data Layout for Kaplan-Meier Curves####
+#### Alternative Data Layout for Kaplan-Meier Curves ####
 
 Alternative data layout is required for Kaplan-Meier(K-M) curves. K-M estimator is calculated from the product limit of survival probabilities. With the data object we instantiated above, a K-M data object for data layout and K-M curve is returned from `kmobject = KMEst(survobj)`.
 
@@ -48,7 +48,7 @@ To transform the returned object into a `DataFrame` object in Julia,  [DataFrame
 | 7   | 9.0  | 2     | 2        | 0     | 1.0        | 0.45     |
 ```
 
-####Kaplan-Meier Curve####
+#### Kaplan-Meier Curve ####
 To plot the survival data using K-M curves, `SurvPlot(kmobject)`
 
 <img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figures/Figure1.1.png" width="450">
@@ -62,7 +62,7 @@ To plot multiple curves in a same figure,`SurvPlot(km_object1, km_object2...)`
 
 <img src="https://github.com/conta1992/Survival.jl/blob/master/Example/Figures/Figure1.3.png" width="450">
 
-####Nelson-Aalen Estimator####
+#### Nelson-Aalen Estimator ####
 To get the Nelson-Aalen (N-A) estimator, run `naobject = NAEst(surv_obj1)`, the returned object could also be transformed into a `DataFrame`, by running `SurvLayout(naobject)`.
 ```
 6x6 DataFrames.DataFrame
@@ -75,7 +75,7 @@ To get the Nelson-Aalen (N-A) estimator, run `naobject = NAEst(surv_obj1)`, the 
 | 5   | 8.0  | 4     | 1        | 1     | 0.75       | 4.28889           |
 | 6   | 9.0  | 2     | 2        | 0     | 1.0        | 5.28889           |
 ```
-####Mean Residual Life for Censored Data####
+#### Mean Residual Life for Censored Data ####
 Based on the Kaplan-Meier estimates, mean residual life could be calculated for censored data. Run `meanresidobject(kmobject)` to get a mean residual life estimates for all the censored data in the input survival data. Similarly, `SurvLayout(meanresidobject)` could transform the returned data into a dataframe.
 
 ```
